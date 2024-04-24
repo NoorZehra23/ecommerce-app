@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from 'react-router-dom';
+import Home from './Home';
+import Layout from './Layout';
+import Login from './Login';
+import SignUp from './Signup';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import Cart from './Components/Cart';
+import MyProfile from './Components/MyProfile';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () => {
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/'  element={<Layout/>}>
+        <Route path='/' element={<Home/>} />
+        <Route path='/login'element={<Login/>} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/cart'  element={isLoggedIn ?<Cart/> : <Navigate to='/login' />}/>
+        <Route path='/myProfile'  element={isLoggedIn ?<MyProfile/> : <Navigate to='/login' />}/>
+      </Route>
+    )
+  )
+
+  return <RouterProvider router={router}  />;
+};
 
 export default App;

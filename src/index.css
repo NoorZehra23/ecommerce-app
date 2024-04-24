@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.menu-item:hover {
+  background-color: #1890ff; /* Change to your desired hover background color */
+  color: #fff; /* Change to your desired hover text color */
+}
