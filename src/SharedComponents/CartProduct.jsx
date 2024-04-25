@@ -9,7 +9,8 @@ const CartProduct = ({ item }) => {
     const dispatch = useDispatch();
 
     const handleCross = () => {
-       dispatch(removeFromCart(product));
+        dispatch(removeFromCart(product));
+
     };
 
     const handleIncrease = () => {
@@ -21,11 +22,10 @@ const CartProduct = ({ item }) => {
     };
 
 
-
     return (
-        <div style={{ border: '1px solid #d9d9d9', borderRadius: '5px', marginBottom: '10px' }}>
+        <div style={{ border: '1px solid #d9d9d9', marginBottom: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={product.image} alt={product.title} style={{ width: '80px', height: 'auto', marginRight: '10px' }} />
+                <img src={product.image} alt={product.title} style={{ width: '80px', height: 'auto', marginLeft: '3px', marginRight: '2px' }} />
                 <div style={{ flex: 1 }}>
                     <Card
                         title={product.title}
@@ -33,11 +33,14 @@ const CartProduct = ({ item }) => {
                         bordered={false}
                     >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div>${(product.price * quantity).toFixed(2)}</div>
+                            <div>Rs{(product.price * quantity).toFixed(2)}
+                                <div style={{ color: '#00000074', marginTop: '5px' }}>Items available in stock: {(product.quantity - quantity)}</div>
+                            </div>
+
                             <div>
-                                <Button type="primary" icon={<MinusOutlined />} onClick={handleDecrease} />
+                                <Button type="primary" icon={<MinusOutlined />} onClick={handleDecrease} disabled={quantity === 1} />
                                 <span style={{ margin: '0 10px' }}>{quantity}</span>
-                                <Button type="primary" icon={<PlusOutlined />} onClick={handleIncrease} />
+                                <Button type="primary" icon={<PlusOutlined />} onClick={handleIncrease} disabled={quantity >= product.quantity} />
                             </div>
                         </div>
                     </Card>

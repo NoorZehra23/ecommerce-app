@@ -21,7 +21,6 @@ export default function Home() {
                 }));
                 setProducts(productsArray);
                 setLoading(false);
-                console.log(productsArray);
             } else {
                 console.log('No data available');
             }

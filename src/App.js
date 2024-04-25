@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import Cart from './Components/Cart';
 import MyProfile from './Components/MyProfile';
+import ProductsDetail from './Components/ProductsDetail';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
     createRoutesFromElements(
       <Route path='/'  element={<Layout/>}>
         <Route path='/' element={<Home/>} />
+        <Route path='/details' element={<ProductsDetail/>} />
         <Route path='/login'element={<Login/>} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/cart'  element={isLoggedIn ?<Cart/> : <Navigate to='/login' />}/>

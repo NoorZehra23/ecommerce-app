@@ -13,12 +13,13 @@ const fetchUserCartFromFirebase = async (userId) => {
   const snapshot = await get(ref(database, `cart/${userId}`));
   if (snapshot.exists()) {
     const userData = snapshot.val();
-    return userData.cartItems ;
-}
-else {
-  return []
-}   
+    const cartItemsArray = Object.values(userData.cartItems);
+    return cartItemsArray;
+  } else {
+    return [];
+  }
 };
+
 
 export const postUserCartToFirebase = createAsyncThunk(
   'cart/postUserCartToFirebase',
@@ -65,11 +66,11 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       let foundProduct = state.cartItems.find(item => item.product.id ===action.payload.product.id );
             if (foundProduct)
-      {let filteredProducts = state.cartItems.filter(item => item.product.id !== action.payload.product.id);
-      let quantity=action.payload.quantity + foundProduct.quantity
-      let product=action.payload.product
-      state.cartItems=filteredProducts
-      state.cartItems.push({product:product,quantity:quantity});
+            
+      {
+        let quantity=foundProduct.quantity;
+        let updatedQuant=action.payload.quantity +quantity;
+        foundProduct.quantity=updatedQuant;
       }
      else{
       let product=action.payload.product
