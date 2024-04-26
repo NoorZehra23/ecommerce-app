@@ -14,6 +14,7 @@ import { Navigate } from 'react-router-dom';
 import Cart from './Components/Cart';
 import MyProfile from './Components/MyProfile';
 import ProductsDetail from './Components/ProductsDetail';
+import OrderDetails from './Components/OrderDetails';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/cart'  element={isLoggedIn ?<Cart/> : <Navigate to='/login' />}/>
         <Route path='/myProfile'  element={isLoggedIn ?<MyProfile/> : <Navigate to='/login' />}/>
+        <Route path='/myOrders'  element={isLoggedIn ?<OrderDetails/> : <Navigate to='/login' />}/>
       </Route>
     )
   )
