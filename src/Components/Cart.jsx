@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CartProduct from "../SharedComponents/CartProduct";
 import OrderSummary from "../SharedComponents/OrderSummary";
-import { Space } from "antd";
 import { Typography } from "antd";
 const Cart = () => {
   const { Text } = Typography;
@@ -17,7 +16,13 @@ const Cart = () => {
 
   //cart is not empty
   return (
-    <Space>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
       {/* div to display order cart items */}
       <div
         style={{
@@ -34,11 +39,17 @@ const Cart = () => {
         ))}
       </div>
       {/* div to display order summary */}
-      <div style={{ flex: 1, backgroundColor: "#f0f2f5", padding: "16px" }}>
+      <div
+        style={{
+          flex: 1,
+          backgroundColor: "#f0f2f5",
+          padding: "10px",
+          margin: "15px",
+        }}
+      >
         <OrderSummary />
       </div>
-    </Space>
+    </div>
   );
 };
-
 export default Cart;

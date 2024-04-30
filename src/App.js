@@ -15,15 +15,18 @@ import Cart from './Components/Cart';
 import MyProfile from './Components/MyProfile';
 import ProductsDetail from './Components/ProductsDetail';
 import OrderDetails from './Components/OrderDetails';
+import SearchResults from './SharedComponents/SearchResults';
 
 
 const App = () => {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/'  element={<Layout/>}>
         <Route path='/' element={<Home/>} />
-        <Route path='/details' element={<ProductsDetail/>} />
+        <Route path='/search/:query' element={<SearchResults/>} />
+        <Route path='/product/:productId' element={<ProductsDetail/>} />
         <Route path='/login'element={<Login/>} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/cart'  element={isLoggedIn ?<Cart/> : <Navigate to='/login' />}/>

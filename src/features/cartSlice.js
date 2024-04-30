@@ -63,6 +63,11 @@ export const cartSlice = createSlice({
       state.cartCount-=1   
     }
     },
+    emptyCart: (state) => {
+      state.cartCount=0;
+      state.cartItems=[];   
+    }
+    ,
     addToCart: (state, action) => {
       let foundProduct = state.cartItems.find(item => item.product.id ===action.payload.product.id );
             if (foundProduct)
@@ -113,5 +118,5 @@ export const cartSlice = createSlice({
         }
 });
 
-export const { removeFromCart,addToCart} = cartSlice.actions;
+export const { removeFromCart,addToCart,emptyCart} = cartSlice.actions;
 export default  cartSlice.reducer;
